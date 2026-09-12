@@ -1,0 +1,7 @@
+image= /home/$USER/.config/swaylock/ayashameimaru-lock.png
+scaling=fit
+show-failed-attempts
+ring-color=#622000
+color=000000
+indicator-radius=100
+indicator-thickness=20
