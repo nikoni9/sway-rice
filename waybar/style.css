@@ -1,0 +1,243 @@
+/* Gruvbox Dark Colors */
+@define-color background #282828;
+@define-color background-light #3c3836;
+@define-color foreground #ebdbb2;
+@define-color black #32302f;
+@define-color red #cc241d;
+@define-color green #98971a;
+@define-color yellow #d79921;
+@define-color blue #458588;
+@define-color magenta #b16286;
+@define-color cyan #689d6a;
+@define-color white #ebdbb2;
+@define-color orange #d65d0e;
+
+
+/* Modules */
+@define-color bg @background;
+@define-color fg @foreground;
+@define-color ws-focused-bg #eb7d00;
+@define-color ws-focused-fg #32302f;
+@define-color window-bg #98971a;
+@define-color window-fg #32302f;
+@define-color audio-bg #458588;
+@define-color audio-fg #32302f;
+@define-color tray-bg rgba(0,0,0,0);
+/* Right-side gradient follows the module order in config.jsonc. */
+@define-color backlight-bg #d79921;
+@define-color backlight-fg #32302f;
+@define-color network-bg #d7921f;
+@define-color cpu-bg #d78a1c;
+@define-color memory-bg #d7821a;
+@define-color temperature-bg #d67b18;
+@define-color battery-external-bg #d67415;
+@define-color battery-internal-bg #d66c13;
+@define-color uptime-bg #d66410;
+@define-color disk-bg #d65d0e;
+@define-color module-fg #32302f;
+@define-color clock-bg #32302f;
+@define-color clock-fg @foreground;
+
+* {
+    /* Fira Sans for text/numbers + Symbols Nerd Font for missing icons */
+    font-family: "Fira Sans", "Symbols Nerd Font", sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-bottom: none;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window#waybar > box {
+    padding: 4px;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    background-color: transparent;
+    border-radius: 4px;
+    color: @fg;
+    border-radius: 4px;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+    background-color: @ws-focused-bg;
+    color: @ws-focused-fg;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+}
+
+#mode {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#disk,
+#custom-uptime {
+    padding: 0 10px;
+    border-radius: 4px;
+}
+
+#cpu {
+    background-color: @cpu-bg;
+    color: @module-fg;
+}
+
+#memory {
+    background-color: @memory-bg;
+    color: @module-fg;
+}
+
+#temperature {
+    background-color: @temperature-bg;
+    color: @module-fg;
+}
+
+#custom-uptime {
+    background-color: @uptime-bg;
+    color: @module-fg;
+}
+
+#disk {
+    background-color: @disk-bg;
+    color: @module-fg;
+}
+
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon{
+    padding: 0 10px;
+    border-radius: 4px;
+    color: #ffffff;
+}
+
+#mpd {
+    padding: 0 10px;
+    border-radius: 4px;
+    color: #ffffff;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+    background-color: @clock-bg;
+    color: @clock-fg;
+}
+
+#battery {
+    color: @module-fg;
+}
+
+#battery.external {
+    background-color: @battery-external-bg;
+}
+
+#battery.internal {
+    background-color: @battery-internal-bg;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#backlight {
+    background-color: @backlight-bg;
+    color: @backlight-fg;
+}
+
+#network {
+    background-color: @network-bg;
+    color: @module-fg;
+}
+
+#network.disconnected {
+    background-color: @red;
+    color: #ffffff;
+}
+
+#pulseaudio {
+    background-color: @audio-bg;
+    color: @audio-fg;
+}
+
+
+
+#tray {
+    background-color: @tray-bg;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
