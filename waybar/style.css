@@ -138,6 +138,7 @@ button:hover {
 
 #backlight,
 #network,
+#custom-vpn,
 #pulseaudio,
 #wireplumber,
 #custom-media,
@@ -218,6 +219,16 @@ button:hover {
 }
 
 #network.disconnected {
+    background-color: @red;
+    color: #ffffff;
+}
+
+#custom-vpn.connected {
+    background-color: @green;
+    color: @module-fg;
+}
+
+#custom-vpn.disconnected {
     background-color: @red;
     color: #ffffff;
 }
