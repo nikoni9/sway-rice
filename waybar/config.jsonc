@@ -6,7 +6,7 @@
     "margin": 0,
     "modules-left": ["sway/workspaces", "sway/mode", "custom/weather", "custom/quote"],
         "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "temperature", "battery#external", "battery#internal", "custom/uptime", "disk#root", "disk#home", "custom/updates", "tray", "mode"],
+    "modules-right": ["pulseaudio", "backlight", "network", "custom/vpn", "cpu", "memory", "temperature", "battery#external", "battery#internal", "custom/uptime", "disk#root", "disk#home", "custom/updates", "tray", "mode"],
 
 
     "sway/workspaces": {
@@ -169,6 +169,15 @@
         "format-wifi": "{ifname}: {ipaddr}/{cidr}",
         "tooltip-format": "{ifname}: {ipaddr}",
         "on-click": "alacritty -e nmtui"
+    },
+
+    "custom/vpn": {
+        "exec": "~/.config/waybar/vpn.sh status",
+        "return-type": "json",
+        "interval": 5,
+        "signal": 9,
+        "on-click": "~/.config/waybar/vpn.sh toggle",
+        "tooltip": true
     },
 
     "pulseaudio": {
