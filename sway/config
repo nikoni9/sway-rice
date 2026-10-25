@@ -31,8 +31,8 @@ output * bg backgrounds/sway/touhou.jpg fill
 output * allow_tearing yes
 output * adaptive_sync off
 
-# Quick screenshot via Grim and Slurp, Wofi
-bindsym $mod+Shift+s exec zsh -c 'filename=$(date +"%d.%m.%Y_%H-%M-%S"); slurp | grim -g - ~/Pictures/Screenshots/$filename.png'
+# Select a screenshot region with Noctalia (Super+Shift+S)
+bindsym $mod+Shift+s exec noctalia msg screenshot-region
 ### Idle configuration
 #
 # Example configuration:
