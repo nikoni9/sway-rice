@@ -1,0 +1,269 @@
+# Noctalia v5 replacement for the Waybar configuration in ../waybar/.
+# Install this directory as ~/.config/noctalia (or symlink it there).
+
+[shell]
+font_family = "Fira Sans, Symbols Nerd Font"
+time_format = "{:%H:%M}"
+date_format = "%Y-%m-%d"
+clipboard_enabled = true
+clipboard_keep_from_closed_apps = true
+clipboard_history_max_entries = 100
+clipboard_confirm_clear_history = true
+clipboard_auto_paste = "auto"
+clipboard_image_action_command = ""  
+corner_radius_scale = 0
+external_ip_enabled   = true
+
+[shell.panel]
+transparency_mode     = "solid"  # solid | soft | glass; controls floating panel opacity and card translucency
+borders               = true   # outline on floating panel surfaces
+border_color          = "outline"   # floating panel outline color: theme role token or #RRGGBB
+border_width          = 1.0         # floating panel outline width in px, 0 hides the stroke
+shadow                = true   #
+clipboard_placement = "attached"
+clipboard_position       = "center" 
+
+[theme]
+mode = "dark"
+shell_mode = "dark"
+source = "custom"
+custom_palette = "aya-orange"
+
+[bar]
+order = ["main"]
+
+[bar.main]
+position = "top"
+enabled = true
+auto_hide = false
+reserve_space = true
+layer = "top"
+thickness = 38
+background_opacity = 1.0
+compositor_blur = false
+border_width = 0.0
+shadow = false
+radius = 0
+concave_edge_corners = false
+margin_ends = 0
+margin_edge = 0
+padding = 4
+widget_spacing = 2
+font_family = "Fira Sans, Symbols Nerd Font"
+font_weight = 400
+hover_highlight = true
+capsule = true
+capsule_radius = 0
+capsule_padding = 8
+capsule_thickness = 0.76
+capsule_fill = "surface_variant"
+capsule_foreground = "on_surface"
+start = ["workspaces", "weather"]
+center = ["clock"]
+end = ["clipboard", "volume", "brightness", "network", "bluetooth", "cpu", "memory", "temperature", "battery-external", "battery-internal", "disk-root", "disk-home", "tray"]
+
+[control_center]
+sidebar = "compact"
+sidebar_section = "compact"
+show_shortcut_labels = false
+
+[system.monitor]
+enabled = true
+cpu_poll_seconds = 10
+memory_poll_seconds = 10
+disk_poll_seconds = 30
+gpu_poll_seconds = 0
+
+[widget.workspaces]
+style = "regular"
+show_labels = true
+show_tooltip = true
+label_source = "name"
+max_label_chars = 10
+labels_only_when_occupied = false
+focused_color = "#eb7d00"
+occupied_color = "#3c3836"
+empty_color = "#3c3836"
+urgent_color = "#cc241d"
+change_color_on_hover = false
+pill_scale = 2.0
+active_pill_size = 2.0
+inactive_pill_size = 1.0
+capsule = false
+
+[widget.weather]
+show_condition = false
+show_temperature = true
+capsule = false
+
+[widget.clock]
+format = "󰥔 {:%H:%M}"
+tooltip_format = "{:%A, %Y-%m-%d}"
+capsule_fill = "#32302f"
+capsule_foreground = "#ebdbb2"
+
+[widget.clock.actions]
+left = "panel-toggle control-center calendar"
+right = "panel-toggle control-center calendar"
+
+[location]
+auto_locate = false            # resolve coordinates from your IP address when true
+address     = "Frankfurt, DE"  
+
+# State Hessen
+[calendar.account.holidays]
+name = "Canadian Holidays Hessen (DE)"
+server_url = "https://www.feiertage-deutschland.de/kalender-download/ics/schulferien-hessen.ics"
+type = "ics"
+color = "#FF0000"
+
+# Left click opens Noctalia's full output/device/stream mixer. Scrolling keeps
+# the Waybar two-percent steps; right click toggles mute.
+[widget.volume]
+device = "output"
+show_label = true
+mute_color = "#cc241d"
+capsule_fill = "#458588"
+capsule_foreground = "#32302f"
+
+[widget.volume.actions]
+left = "panel-toggle control-center audio"
+right = "volume-mute"
+scroll_up = "volume-up 2%"
+scroll_down = "volume-down 2%"
+
+# Left click opens display controls; scrolling matches the old five-percent
+# brightness steps.
+[widget.brightness]
+show_label = true
+show_when_unavailable = false
+capsule_fill = "#d79921"
+capsule_foreground = "#32302f"
+
+[widget.brightness.actions]
+left = "panel-toggle control-center monitor"
+scroll_up = "brightness-up current 5%"
+scroll_down = "brightness-down current 5%"
+
+[widget.network]
+show_label = true
+vpn_status = "both"
+show_vpn_label = false
+capsule_fill = "#d7921f"
+capsule_foreground = "#32302f"
+
+[widget.network.actions]
+left = "panel-toggle control-center network"
+right = "network-toggle"
+
+# Left click provides pairing and device controls. Right click toggles the
+# adapter, replacing the custom bluetoothctl status script.
+[widget.bluetooth]
+show_label = false
+hide_when_adapter_off = false
+hide_when_no_connected_device = false
+capsule_fill = "#458588"
+capsule_foreground = "#32302f"
+
+[widget.bluetooth.actions]
+left = "panel-toggle control-center bluetooth"
+right = "bluetooth-toggle"
+
+[widget.cpu]
+type = "sysmon"
+stat = "cpu_usage"
+visualization = "none"
+show_value = true
+show_glyph = true
+capsule_fill = "#d78a1c"
+capsule_foreground = "#32302f"
+
+[widget.cpu.actions]
+left = "panel-toggle control-center system"
+
+[widget.memory]
+type = "sysmon"
+stat = "ram_pct"
+visualization = "none"
+show_value = true
+show_glyph = true
+capsule_fill = "#d7821a"
+capsule_foreground = "#32302f"
+
+[widget.memory.actions]
+left = "panel-toggle control-center system"
+
+[widget.temperature]
+type = "sysmon"
+stat = "cpu_temp"
+visualization = "none"
+show_value = true
+show_glyph = true
+capsule_fill = "#d67b18"
+capsule_foreground = "#32302f"
+
+[widget.temperature.actions]
+left = "panel-toggle control-center system"
+
+[widget.battery-external]
+type = "battery"
+device = "BAT1"
+display_mode = "glyph"
+show_label = true
+label_content = "percent"
+warning_color = "#cc241d"
+capsule_fill = "#d67415"
+capsule_foreground = "#32302f"
+
+[widget.battery-external.actions]
+left = "panel-toggle control-center power"
+
+[widget.battery-internal]
+type = "battery"
+device = "BAT0"
+display_mode = "glyph"
+show_label = true
+label_content = "percent"
+warning_color = "#cc241d"
+capsule_fill = "#d66c13"
+capsule_foreground = "#32302f"
+
+[widget.battery-internal.actions]
+left = "panel-toggle control-center power"
+
+[widget.disk-root]
+type = "sysmon"
+stat = "disk_used_pct"
+path = "/"
+visualization = "none"
+show_value = true
+show_glyph = true
+custom_label = "/"
+capsule_fill = "#d65d0e"
+capsule_foreground = "#32302f"
+
+[widget.disk-root.actions]
+left = "panel-toggle control-center system"
+
+[widget.disk-home]
+type = "sysmon"
+stat = "disk_used_pct"
+path = "/home"
+visualization = "none"
+show_value = true
+show_glyph = true
+custom_label = "/home"
+capsule_fill = "#d65d0e"
+capsule_foreground = "#32302f"
+
+[widget.disk-home.actions]
+left = "panel-toggle control-center system"
+
+[widget.tray]
+drawer = false
+hide_passive = false
+match_adjacent_spacing = false
+capsule = false
+
+[widget.clipboard]
+glyph = "clipboard-list"
