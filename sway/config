@@ -46,8 +46,8 @@ bindsym $mod+Shift+s exec noctalia msg screenshot-region
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-gaps inner 5
-gaps outer 5
+gaps inner 0
+gaps outer 0
 
 
 # Syntax: class border background text indicator child_border
